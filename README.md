@@ -2,7 +2,7 @@
 
 [Paper for data](https://insight.jci.org/articles/view/124928#sd)
 
-JCI Insight. 2018;3(23):e124928. [DOI](https://doi.org/10.1172/jci.insight.124928.)
+JCI Insight. 2018;3(23):e124928. [DOI](https://doi.org/10.1172/jci.insight.124928)
 
 [Flow Repo link 1](http://flowrepository.org/id/FR-FCM-ZYQ9)
 

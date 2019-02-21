@@ -8,6 +8,8 @@ Most high-dimensional cytometry studies seek to identify subpopulations that are
 
 ## Approach
 
+### Installation
+
 ## Data
 
 ### Human

@@ -1,5 +1,9 @@
 # Automatic-classification-of-CyTOF-measurements-to-generate-biomarkers-of-human-immunodeficiencies
 
+## Background
+
+## Approach
+
 ## Data
 
 ### Human
@@ -52,3 +56,8 @@ CD45+ scRNAseq
 
 Tabula muris dataset (https://tabula-muris.ds.czbiohub.org/)
 
+## Hackathon members
+
+Brian Capaldo brian.capaldo@gmail.com
+
+## References

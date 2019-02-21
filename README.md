@@ -2,6 +2,10 @@
 
 ## Background
 
+The advent of mass and spectral cytometers have lead to the emergence of high-dimensional cytometry. With the ability to survey expression of tens of markers simultaneously for individual cells, the traditional approach of manual gating employed by the cytometry community at large has been superseded  by more computationally intensive methods of data analysis. There currently exist a host of computational approaches for the analysis of high-dimensional of cytometry data, however, ascribing biological relevance to the subpopulations identified by these tools remains on the biologist. Towards this, we have developed TBD.
+
+Most high-dimensional cytometry studies seek to identify subpopulations that are associated with the experimental design and follow a fairly standard approach. After data collection, the data undergoes a series of quality control, normalization, and cleaning steps involving the removal of doublets, debris, and potentially the selection of known subsets of interest. The cleaned data is then segmented into subpopulations, usually by one of any number of clustering algorithms. Once subpopulations have been identified, each can be tested for evidence of differential expression or differential frequency across conditions of the experiment.  
+
 ## Approach
 
 ## Data
@@ -54,7 +58,7 @@ CD45+ scRNAseq
 
 [GEO link](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE119352)
 
-Tabula muris dataset (https://tabula-muris.ds.czbiohub.org/)
+[Tabula muris dataset](https://tabula-muris.ds.czbiohub.org/)
 
 ## Hackathon members
 

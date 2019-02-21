@@ -11,9 +11,7 @@ import re
 import os
 import sys
 
-
-
-datasets = pd.read_csv("rnaseq-datasets.txt",header=None)
+datasets = pd.read_csv("rnaseq-datasets.csv",header=None)
 geo_ftp_base='ftp://ftp.ncbi.nlm.nih.gov/geo/samples/'
 
 main_dir = os.getcwd()
@@ -26,23 +24,22 @@ else:
 
 for index, ds in datasets.iterrows():
     
-    if ds[0] == "scRNAseq":
-        ds_ftp_url = geo_ftp_base + ds[1][:(len(ds[1])-3)]+'nnn/'+ ds[1] + '/' 
+    ds_ftp_url = geo_ftp_base + ds[1][:(len(ds[1])-3)]+'nnn/'+ ds[1] + '/' 
+    print(ds)
+    #Make the data directories
+    
+    if not os.path.isdir(ds[0]):
+        os.mkdir(ds[0])
+    os.chdir(ds[0])
+    
+    if not os.path.isdir(ds[1]):
+        os.mkdir(ds[1])
+    os.chdir(ds[1])
         
-        #Make the data directories
-        if os.path.isdir(ds[1]):
-            os.chdir(ds[1])
-        else:
-            os.mkdir(ds[1])
-            os.chdir(ds[1])
-            
-        args = ['wget', '--recursive','--no-parent', '--no-directories', ds_ftp_url]
-        subprocess.call(args)
-        os.chdir("..")
+    args = ['wget', '--recursive','--no-parent', '--no-directories', ds_ftp_url]
+    subprocess.call(args)
+    os.chdir("../..")
 
-
-
-        
 os.chdir(main_dir)
     
 

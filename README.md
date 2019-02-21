@@ -8,8 +8,6 @@ Most high-dimensional cytometry studies seek to identify subpopulations that are
 
 ## Approach
 
-### Installation
-
 ## Data
 
 ### Human
@@ -65,9 +63,6 @@ CD45+ scRNAseq
 ## Hackathon members
 
 Brian Capaldo brian.capaldo@gmail.com
-
-Wanhu Tang tangw2@niaid.nih.gov
-
-Gege Gui gege.gui@nih.gov
+Ratnadeep Mukherjee ratnadeep.mukherjee@gmail.com
 
 ## References

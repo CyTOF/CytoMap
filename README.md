@@ -63,6 +63,13 @@ CD45+ scRNAseq
 ## Hackathon members
 
 Brian Capaldo brian.capaldo@gmail.com
+
 Ratnadeep Mukherjee ratnadeep.mukherjee@gmail.com
+
+Wanhu Tang tangw2@niaid.nih.gov
+
+James Anibal james.anibal@nih.gov
+
+Gege Gui gege.gui@nih.gov
 
 ## References

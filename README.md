@@ -24,7 +24,20 @@ Our NextFlow workflow file was used to generate this workflow diagram: ![](flowc
 
 Docker was used to create the container. 
 
+## Results
+
+A network of autoimmune phenotypes:
+
 ![](test_dag_plot.png)
+
+Frequencies of clusters across samples
+
+![](CyTOF_Frequencies.png)
+
+Median expression of each marker across clusters
+
+![](CyTOF_MedianExpression.png)
+
 
 ## Documentation
 

@@ -1,6 +1,7 @@
 library(tidyverse)
 library(ggraph)
 library(igraph)
+library(ggrepel)
 
 parent_child <- read_csv("example-phenotype-list.csv") %>%
   mutate(phenotype_depth = str_count(immunophenotype, " ")) %>%
@@ -57,4 +58,9 @@ graph <- graph_from_data_frame(flare$edges, vertices = flare$vertices)
 decompose.graph(gr)[[2]] %>%
   ggraph('circlepack') + 
   geom_node_circle(aes(fill = depth), size = 0.25, n = 50) + 
+  geom_node_label(aes(label = name, position = "repel")) + 
   coord_fixed()
+ggsave("test_dag_plot.png")
+
+decompose.graph(gr)[[2]] %>%
+  create_layout('circlepack')

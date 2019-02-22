@@ -24,6 +24,8 @@ Our NextFlow workflow file was used to generate this workflow diagram: ![](flowc
 
 Docker was used to create the container. 
 
+![](test_dag_plot.png)
+
 ## Documentation
 
 Coming soon...

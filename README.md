@@ -26,7 +26,41 @@ Docker was used to create the container.
 
 ## Documentation
 
-Coming soon...
+### Docker container
+You can find our docker file on dockerhub at [tangwanhu/cytomap](https://hub.docker.com/r/tangwanhu/cytomap)
+
+To explore the docker container
+```
+sudo docker pull tangwanhu/cytomap:first
+sudo docker run -it tangwanhu/cytomap:first
+```
+
+**NOTE: This is just a skeleton and will not run at this time**
+
+To run our entire pipeline inside a docker container run:
+```
+bash import_data.sh
+sudo docker pull tangwanhu/cytomap:first
+nextflow run main.nf --cytof data/cytof/mice --scrna data/scRNAseq/mice -with-docker tangwanhu/cytomap:first
+```
+
+### Package dependencies
+
+Python packages
+- [Numpy](http://www.numpy.org/)
+- [scikit-learn](https://scikit-learn.org/stable/)
+- [Pandas](https://pandas.pydata.org/)
+- [Cython](https://cython.org/)
+- [fftw](http://www.fftw.org/)
+- [scipy](scipy)
+- [HAL-x](https://pypi.org/project/hal-x/)
+
+R packages
+- [FlowRepositoryR](https://www.bioconductor.org/packages/release/bioc/html/FlowRepositoryR.html)
+- [Matrix](https://cran.r-project.org/web/packages/Matrix/index.html)
+- [ggraph](https://github.com/thomasp85/ggraph)    
+
+### Methods details
 
 ## Data
 

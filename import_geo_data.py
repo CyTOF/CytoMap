@@ -34,14 +34,14 @@ for index, ds in datasets.iterrows():
         os.mkdir(ds[0])
     os.chdir(ds[0])
     
-    if not os.path.isdir(ds[1]):
-        os.mkdir(ds[1])
-    os.chdir(ds[1])
+    #if not os.path.isdir(ds[1]):
+    #    os.mkdir(ds[1])
+    #os.chdir(ds[1])
     
     #Use wget to obtain all data files under that GEO accession
     args = ['wget', '--recursive','--no-parent', '--no-directories', ds_ftp_url]
     subprocess.call(args)
-    os.chdir("../..")
+    os.chdir("../")
 
 #Return home
 os.chdir(main_dir)

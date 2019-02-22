@@ -33,7 +33,7 @@ def helpMessage() {
     =========================================
     Usage:
     The typical command for running the pipeline is as follows:
-    nextflow run NCBI-Hackathon/cytomaton --cytof 'data/cytof' --scrna 'data/scRNAseq' -profile docker
+    nextflow run NCBI-Hackathon/cytomaton --cytof 'data/cytof/mice' --scrna 'data/scRNAseq/mice' -profile docker
 
     Mandatory arguments:
       --cytof                       Path to cytof data (must be surrounded with quotes).
@@ -44,41 +44,112 @@ def helpMessage() {
     """.stripIndent()
 }
 
+cytof_raw = Channel.fromPath( params.cytof + "/*" )
+scrna_raw = Channel.fromPath( params.scrna + "/*")
+
+
 process prepare_cytof {
 
   input:
+    file cytof_file from cytof_raw
 
   output:
-  
+    file '*.proc' into cytof_proc
+
   script:
+    """
+    touch '${cytof_file}.proc'
+    """
 
 
 }
 
 process prepare_scrna {
 
+
+  input:
+    file scrna_file from scrna_raw
+
+  output:
+    file '*.proc' into scrna_proc
+
+  script:
+    """
+    touch '${scrna_file}.proc'
+    """
+
 }
 
 process halx_cytof {
+
+  input:
+    file cytof_all_proc from cytof_proc.collect()
+
+  output:
+    file "cytof.halx" into cytof_halx
+
+  script:
+    """
+    touch cytof.halx
+    """
 
 }
 
 process halx_scrna {
   
+  input:
+    file scrna_all_proc from scrna_proc.collect()
+
+  output:
+    file "scrna.halx" into scrna_halx
+
+  script:
+    """
+    touch scrna.halx
+    """
 }
 
 process infer_feature_bucket {
 
+  input:
+    file scrna_halx
+    file cytof_halx
+  
+  output:
+    file "cluster_features.txt" into feature_bucket
+
+  script:
+    """
+    touch cluster_features.txt
+    """
 }
 
 process map_cyto_scrna {
 
+  input:
+    file scrna_halx
+    file cytof_halx
+    file feature_bucket
+
+  output:
+    file "cyto_rna_map.txt" into cyto_rna_map
+
+  script:     
+    """
+    touch cyto_rna_map.txt
+    """
 }
 
 process assign_immunophenotype {
 
+"""
+echo "assign immunophenotype"
+"""
+
 }
 
 process experimental_analysis {
-
+"""
+echo "experimental analysis"
+"""
 }

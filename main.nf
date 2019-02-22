@@ -13,11 +13,13 @@
  Wanhu Tang <tangw2@niaid.nih.gov>
  James Anibal <james.anibal@nih.gov>
  Gege Gui <gege.gui@nih.gov>
+ Jaleal Sanjak <jsanjak@gryphonscientific.com>
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
 Pipeline overview:
  - 1:   Runs HAL-x on single cell data
  - 2:   Maps HAL-x clusters from cytometry to scRNA seq
+ - 2:   Assign immunophenotypes to cytomery data
  - 3:   Compare differences between experimental groups
  ----------------------------------------------------------------------------------------
 */

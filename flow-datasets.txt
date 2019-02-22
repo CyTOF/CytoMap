@@ -1,3 +1,5 @@
-FR-FCM-ZYPM
-FR-FCM-ZYPN
-FR-FCM-ZYPX
+mice,FR-FCM-ZYPM,tumor
+mice,FR-FCM-ZYPN,tumor
+mice,FR-FCM-ZYPX,tumor
+human,FR-FCM-ZYQ9,human
+human,FR-FCM-ZYQB,human

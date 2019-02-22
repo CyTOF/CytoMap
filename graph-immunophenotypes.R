@@ -62,5 +62,40 @@ decompose.graph(gr)[[2]] %>%
   coord_fixed()
 ggsave("test_dag_plot.png")
 
+layout_special <- decompose.graph(gr)[[2]] %>%
+  create_layout('circlepack') %>%
+  as.data.frame()
+
+
+layout_special %>%
+  mutate(updated_names <- c("CD41hi CD61hi CD9+",
+                            "CD34+",
+                            "CD34-",
+                            "CD38-",
+                            "CD117+",
+                            "CD45RA+",
+                            "CD117-",
+                            "CD123-",
+                            "CD45RA-",
+                            "",
+                            "CD123+",
+                            ""))
+
+
 decompose.graph(gr)[[2]] %>%
-  create_layout('circlepack')
+  ggraph('circlepack') + 
+  geom_node_circle(aes(fill = depth), size = 0.25, n = 50) + 
+  geom_node_label(aes(label = c("CD41hi CD61hi CD9+",
+                                "CD34+",
+                                "CD34-",
+                                "CD38-",
+                                "CD117+",
+                                "CD45RA+",
+                                "CD117-",
+                                "CD123-",
+                                "CD45RA-",
+                                "",
+                                "CD123+",
+                                ""))) + 
+  coord_fixed()
+ggsave("test_dag_plot.png")

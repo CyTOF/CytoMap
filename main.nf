@@ -19,10 +19,10 @@
 Pipeline overview:
  - 1:   Data preprocessing 
  - 2:   Runs HAL-x on single cell data
- - 3:   Infer network of features
- - 4:   Maps HAL-x clusters from cytometry to scRNA seq
- - 5:   Assign immunophenotypes to cytomery data
- - 6:   Compare differences between experimental groups
+ - 3:   Differential Abundance and Expression analysis
+ - 4:   Construct feature buckets
+ - 5:   Map feature buckets
+ - 6:   Visualize results
  ----------------------------------------------------------------------------------------
 */
 
@@ -80,10 +80,13 @@ process prepare_scrna {
 
 }
 
+scrna_all_proc = scrna_proc.collect()
+cytof_all_proc = cytof_proc.collect()
+
 process halx_cytof {
 
   input:
-    file cytof_all_proc from cytof_proc.collect()
+    file cytof_all from cytof_all_proc
 
   output:
     file "cytof.halx" into cytof_halx
@@ -98,7 +101,7 @@ process halx_cytof {
 process halx_scrna {
   
   input:
-    file scrna_all_proc from scrna_proc.collect()
+    file scrna_all from scrna_all_proc
 
   output:
     file "scrna.halx" into scrna_halx
@@ -109,47 +112,77 @@ process halx_scrna {
     """
 }
 
-process infer_feature_bucket {
-
-  input:
-    file scrna_halx
-    file cytof_halx
+process diff_AE_scrna {
   
+  input:
+    file scrna_all from scrna_all_proc
+
   output:
-    file "cluster_features.txt" into feature_bucket
+    file "scrna.diff" into scrna_diff_AE
 
   script:
     """
-    touch cluster_features.txt
+    touch scrna.diff
     """
 }
 
-process map_cyto_scrna {
+process diff_AE_cytof {
+  
+  input:
+    file ctyof_all from cytof_all_proc
+
+  output:
+    file "cytof.diff" into cytof_diff_AE
+
+  script:
+    """
+    touch cytof.diff
+    """
+}
+
+
+
+process scrna_feature_bucket {
 
   input:
     file scrna_halx
+    file scrna_diff_AE
+  
+  output:
+    file "scrna_bucket.txt" into scrna_bucket
+
+  script:
+    """
+    touch scrna_bucket.txt
+    """
+}
+
+process cytof_feature_bucket {
+
+  input:
     file cytof_halx
-    file feature_bucket
+    file cytof_diff_AE
+  
+  output:
+    file "cytof_bucket.txt" into cytof_bucket
+
+  script:
+    """
+    touch cytof_bucket.txt
+    """
+}
+
+process map_cytof_scrna {
+
+  input:
+    file cytof_bucket
+    file scrna_bucket
 
   output:
-    file "cyto_rna_map.txt" into cyto_rna_map
+    file "cytof_rna_map.txt" into cytof_rna_map
 
   script:     
     """
-    touch cyto_rna_map.txt
+    touch cytof_rna_map.txt
     """
-}
-
-process assign_immunophenotype {
-
-"""
-echo "assign immunophenotype"
-"""
-
-}
-
-process experimental_analysis {
-"""
-echo "experimental analysis"
-"""
 }

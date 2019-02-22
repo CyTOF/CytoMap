@@ -14,7 +14,13 @@ For FCS files, automated immunophenotyping is performed by using k means cluster
 
 To assess differential expression and abundance, welch's t test was used.
 
-Nextflow was used to handle the job operations for the tool.
+Nextflow was used to handle the job operations for the tool. However, we do not use NextFlow to import the data that we used for our analysis, because we intend this workflow to be useful for other datasets. To import the data that we used run:
+
+```
+bash import_data.sh
+```
+
+Our NextFlow workflow file was used to generate this workflow diagram: ![](flowchart.png)
 
 Docker was used to create the container. 
 

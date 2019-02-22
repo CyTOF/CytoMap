@@ -19,8 +19,8 @@
 Pipeline overview:
  - 1:   Runs HAL-x on single cell data
  - 2:   Maps HAL-x clusters from cytometry to scRNA seq
- - 2:   Assign immunophenotypes to cytomery data
- - 3:   Compare differences between experimental groups
+ - 3:   Assign immunophenotypes to cytomery data
+ - 4:   Compare differences between experimental groups
  ----------------------------------------------------------------------------------------
 */
 
@@ -66,4 +66,56 @@ def helpMessage() {
       --clusterOptions              Extra SLURM options, used in conjunction with Uppmax.config
       -name                         Name for the pipeline run. If not specified, Nextflow will automatically generate a random mnemonic
     """.stripIndent()
+}
+
+
+process bwa {
+    tag "$prefix"
+    publishDir path: { params.saveAlignedIntermediates ? "${params.outdir}/bwa" : params.outdir }, mode: 'copy',
+               saveAs: {filename -> params.saveAlignedIntermediates ? filename : null }
+
+    input:
+    file reads from trimmed_reads
+    file index from bwa_index.first()
+
+    output:
+    file '*.bam' into bwa_bam
+
+    script:
+    prefix = reads[0].toString() - ~/(.R1)?(_1)?(_R1)?(_trimmed)?(_val_1)?(\.fq)?(\.fastq)?(\.gz)?$/
+    filtering = params.allow_multi_align ? '' : "| samtools view -b -q 1 -F 4 -F 256"
+    """
+    bwa mem -M ${index}/genome.fa $reads | samtools view -bT $index - $filtering > ${prefix}.bam
+    """
+}
+
+process picard {
+    tag "$prefix"
+    publishDir "${params.outdir}/picard", mode: 'copy'
+
+    input:
+    file bam from bam_picard
+
+    output:
+    file '*.dedup.sorted.bam' into bam_dedup_spp, bam_dedup_ngsplot, bam_dedup_deepTools, bam_dedup_macs, bam_dedup_saturation
+    file '*.dedup.sorted.bam.bai' into bai_dedup_deepTools, bai_dedup_ngsplot, bai_dedup_macs, bai_dedup_saturation
+    file '*.dedup.sorted.bed' into bed_dedup
+    file '*.picardDupMetrics.txt' into picard_reports
+
+    script:
+    prefix = bam[0].toString() - ~/(\.sorted)?(\.bam)?$/
+
+    """
+        java -Xmx10g -XX:ParallelGCThreads=5 -jar \$PICARDJARPATH/picard.jar MarkDuplicates \\
+        INPUT=$bam \\
+        OUTPUT=${prefix}.dedup.bam \\
+        ASSUME_SORTED=true \\
+        REMOVE_DUPLICATES=true \\
+        METRICS_FILE=${prefix}.picardDupMetrics.txt \\
+        VALIDATION_STRINGENCY=LENIENT \\
+        PROGRAM_RECORD_ID='null'
+    samtools sort ${prefix}.dedup.bam -o ${prefix}.dedup.sorted.bam
+    samtools index ${prefix}.dedup.sorted.bam
+    bedtools bamtobed -i ${prefix}.dedup.sorted.bam | sort -k 1,1 -k 2,2n -k 3,3n -k 6,6 > ${prefix}.dedup.sorted.bed
+    """
 }

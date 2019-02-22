@@ -98,4 +98,4 @@ decompose.graph(gr)[[2]] %>%
                                 "CD123+",
                                 ""))) + 
   coord_fixed()
-ggsave("test_dag_plot.png")
+ggsave("fig/test_dag_plot.png")

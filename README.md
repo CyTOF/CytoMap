@@ -20,7 +20,7 @@ Nextflow was used to handle the job operations for the tool. However, we do not 
 bash import_data.sh
 ```
 
-Our NextFlow workflow file was used to generate this workflow diagram: ![](flowchart.png)
+Our NextFlow workflow file was used to generate this workflow diagram: ![](fig/flowchart.png)
 
 Docker was used to create the container. 
 
@@ -28,15 +28,17 @@ Docker was used to create the container.
 
 A network of autoimmune phenotypes:
 
-![](test_dag_plot.png)
+![](fig/test_dag_plot.png)
 
 Frequencies of clusters across samples
 
-![](CyTOF_Frequencies.png)
+![](fig/CyTOF_Frequencies.png)
 
 Median expression of each marker across clusters
 
-![](CyTOF_MedianExpression.png)
+![](fig/CyTOF_MedianExpression.png)
+
+![](fig/helx_scRNAseq_tsne.png)
 
 
 ## Documentation

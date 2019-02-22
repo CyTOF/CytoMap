@@ -8,7 +8,23 @@ Most high-dimensional cytometry studies seek to identify subpopulations that are
 
 ## Approach
 
+Cleaned single cell data, either in FCS format for high parameter cytometry, or full rank, log2 transformed, normalized, CPM values for single cell RNA seq. Data will be read into [HAL-x](https://pypi.org/project/hal-x/) (Hierarchical Agglomerative Learning). Briefly, HAL-x uses tSNE of one sample to quickly map every other sample. It then performs an iterative clustering process where it begins by overclustering using k-NN, and then performs a purify step, where clusters that are similar in expression are merged together. After it has sufficiently clustered the data, each subsequent data set is fitted to the cluster structure using a random forrest. 
+
+For FCS files, automated immunophenotyping is performed by using k means clustering, very basic implementation of flowType approach. 
+
+To assess differential expression and abundance, welch's t test was used.
+
+Nextflow was used to handle the job operations for the tool.
+
+Docker was used to create the container. 
+
+## Documentation
+
+Coming soon...
+
 ## Data
+
+Below is the data used to prototype and develop the project.
 
 ### Human
 
@@ -75,3 +91,5 @@ Gege Gui gege.gui@nih.gov
 Jaleal Sanjak jsanjak@gryphonscientific.com
 
 ## References
+
+Coming soon...

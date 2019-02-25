@@ -137,11 +137,11 @@ CD45+ scRNAseq
 
 Brian Capaldo brian.capaldo@gmail.com
 
-Ratnadeep Mukherjee ratnadeep.mukherjee@gmail.com
+Ratnadeep Mukherjee ratnadeep.mukherjee@gmail.com Team Lead
 
 Wanhu Tang tangw2@niaid.nih.gov
 
-James Anibal james.anibal@nih.gov
+James Anibal james.anibal@nih.gov Team Lead
 
 Gege Gui gege.gui@nih.gov
 
